@@ -1,0 +1,4 @@
+The module folder will haveball the good modules of Nuvi .
+Each module will vbe a seperate express itself, inn case we need to directly expose this module as SAAS
+
+To avail as SAAS the App gateway file will be inherting the respective module gateway file.

@@ -1,0 +1,186 @@
+ default_keys: {
+    'undo': 'ctrl+z',
+    'redo': 'ctrl+shift+z',
+    'collapse': 'alt+left',
+    'uncollapse': 'alt+right',
+    'dedent': 'shift+tab, shift+alt+left',
+    'indent': 'tab, shift+alt+right',
+    'move up': 'shift+alt+up',
+    'move down': 'shift+alt+down',
+    'up': 'up',
+    'down': 'down',
+    'left': 'left',
+    'right': 'right',
+    'add after': 'return',
+    'insert return': 'shift+return',
+    'merge up': 'delete',
+    'stop editing': 'escape',
+    'Save to DB': 'ctrl+q',
+  },
+
+  actions: {
+    'undo': function () {
+      this.o.undo()
+    },
+
+    'redo': function () {
+      this.o.redo()
+    },
+
+    'collapse': function () {
+      this.o.toggleCollapse(true)
+    },
+
+    'uncollapse': function () {
+      this.o.toggleCollapse(false)
+    },
+
+    'dedent': function () {
+      this.o.moveLeft()
+    },
+
+    'indent': function () {
+      this.o.moveRight()
+    },
+
+    'move up': function () {
+      this.o.moveUp()
+    },
+
+    'move down': function () {
+      this.o.moveDown()
+    },
+
+    'up': function () {
+      if (this.isAtTop()) {
+        this.o.goUp();
+      } else {
+        return true
+      }
+    },
+
+    'down': function () {
+      if (this.isAtBottom()) {
+        this.o.goDown()
+      } else {
+        return true
+      }
+    },
+
+    'left': function () {
+      if (this.isAtStart()) {
+        return this.o.goUp()
+      }
+      return true
+    },
+
+    'right': function () {
+      if (this.isAtEnd()) {
+        return this.o.goDown(true)
+      }
+      return true
+    },
+
+    'insert return': function (e) {
+      return true
+    },
+
+    'add after': function () {
+      var ss = this.getSelectionPosition()
+        , content = this.getVisibleValue()
+        , rest = null
+      if (this.isMultiLine()) {
+        return true
+      }
+      var rest = this.splitRightOfCursor()
+      if (!this.isNew) {
+        this.stopEditing()
+      }
+      this.o.addAfter(rest, true)
+    },
+
+    // on backspace
+    'merge up': function () {
+      var value = this.getInputValue()
+      if (!value) {
+        return this.o.remove()
+      }
+      if (!this.isMultiLine() && this.isAtStart()) {
+        return this.o.remove(value)
+      }
+      return true
+    },
+
+    'stop editing': function () {
+      this.stopEditing();
+    },
+    
+    'Save to DB': function () {
+    	
+    	
+    	  var xmlhttp;
+    	  if (window.XMLHttpRequest)
+    	    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    	    xmlhttp=new XMLHttpRequest();
+    	    }
+    	  else
+    	    {// code for IE6, IE5
+    		  //form 13 
+    	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	    }
+    	  xmlhttp.onreadystatechange=function()
+    	    {
+    	    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    	      {
+    	     // document.getElementByIdo("editme").innerHTML=xmlhttp.responseText;
+    	      }
+    	    }
+    	  //alert(view.getNode().innerHTML );
+    	   
+    	    
+    	    
+    	    
+    	    
+    	    
+    	    
+    
+     var id = view.model.root
+    var res = {
+          meta: {},
+        }
+      , n = view.model.ids[id]
+    res.content = n.content
+    res.created = n.created
+    res.type = n.type
+    res.modified = n.modified
+    for (var attr in n.meta) {
+      res.meta[attr] = n.meta[attr]
+     
+    }
+    if (n.children && n.children.length) {
+      res.children = []
+      for (var i=0; i<n.children.length; i++) {
+        res.children.push(view.model.dumpData(n.children[i], true))
+        
+      }
+    }
+    if (true) res.id = id
+    res.collapsed = n.collapsed || false
+     alert(res.children.length);
+  for (i = 0 ; i < res.children.length;i++){
+	  alert(res.children[i].content)
+	  
+	  for(j=0;j<res.meta.length;j++){
+		  alert(res.meta[j])
+	  }
+  }
+    	    
+    	    
+    	    
+    	    
+    	    
+    	   
+    	  xmlhttp.open("GET","sendTheData.view?fileName="+res,true);
+    	  xmlhttp.send();
+      }
+    	

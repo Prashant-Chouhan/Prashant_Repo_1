@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html ng-app="luigi">
+  <head lang="en">
+    <meta charset="utf-8">
+    <title><%= title %></title>
+     <% include eventPlannerRequires %>
+     <!--- <meta name="google-site-verification" content="7lc5HyceLDqpV_6oNHteYFfxDJH7-S3DwnJKtNUKcRg" />  
+     I think something to index in google
+     -->
+    <style type="text/css">
+      body { padding: 50px; }
+    </style>
+    <!---
+    <script type="text/javascript">
+       var App = angular.module('drag-and-drop', ['ngDragDrop', 'ui.bootstrap']);
+      App.controller('oneCtrl', function($scope, $q) {
+        $scope.list1 = {title: 'Drag and Drop with default confirmation'};
+        $scope.list2 = {};
+        $scope.beforeDrop = function() {
+          var deferred = $q.defer();
+          if (confirm('Are you sure?')) {
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+          return deferred.promise;
+        };
+      }); 
+    </script>
+    --->
+  </head>
+  <body>
+   <!---  <h2>Default window.confirmation Vs Custom confirmation</h2>
+    <div ng-controller="oneCtrl">
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="btn btn-primary" data-drag="true" ng-model="list1" jqyoui-draggable="{animate: true}" ng-hide="!list1.title">{{list1.title}}</div>
+        </div>
+        <div class="span6">
+          <div class="thumbnail" data-drop="true" ng-model="list2" jqyoui-droppable="{beforeDrop: 'beforeDrop'}" ng-bind="list2.title ? 'Dropped successfully..!' : 'Drop here...'"></div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    
+    
+    
+      -->
+   
+   <div class="container" >
+   		<div class="row">
+   			<div class="col-xs-12 col-sm-12 col-md-12">
+   				<div class="panel panel-default">
+	   				<div class="panel-heading">
+	   				Sketch Board (Tipid)
+	   				</div>
+	   				<div class="panel-body">
+	   				
+	   				 <h1>Drag and Drop Directives</h1>
+		<p>Simple directives to enable drag and drop in your application</p>
+
+		<div ng-controller="LvlController" style="margin-top:50px;">
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<p>Click and drag a color onto the grid to the right</p>
+					<div class="peg green" x-lvl-draggable="true" data-color="green">Green</div>
+					<div class="peg red" x-lvl-draggable="true" data-color="red">Red</div>
+					<div class="peg blue" x-lvl-draggable="true" data-color="blue">Blue</div>
+					<div class="peg black" x-lvl-draggable="true" data-color="black">Black</div>
+					<div class="peg grey" x-lvl-draggable="true" data-color="grey">Grey</div>
+				</div>
+	
+				<div class="col-md-10">
+					<div ng-repeat="r in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+						<span class="slot" ng-repeat="c in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" x-lvl-draggable='true' x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">s</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	   				
+	   				
+	   				
+	   				
+	   				</div>
+	   			</div>
+   			</div>
+  		</div>
+   
+	   	<div class="row" >
+	   		<div class="col-xs-4 col-sm-4 col-md-4">
+	   			<div class="panel panel-default" id="console" ng-controller="ConsoleController">
+	   				<div class="panel-heading">
+	   				Consoles : Woo beans
+		   			<button type="button" class="btn btn-info btn-xs pull-right" ng-click="addConsole()"> Add Woo </button>
+	   				</div>
+	   				<div class="panel-body">
+	   				<accordion>
+	   				<accordion-group ng-repeat="consoleAccordion in consoleAccordions" > 
+	   				<accordion-heading ><p ng-bind-html="consoleAccordion.title" ng-dblclick="editHeading(consoleAccordion)" contentEditable='{{consoleAccordion.contentEditable}}' ng-blur="undoElementEditibility(consoleAccordion)"></p>  </accordion-heading>
+					 {{consoleAccordion.content}} 
+	   				</accordion-group>   
+	   				</accordion>
+	   				</div>
+	   			</div>
+	   		</div>
+		   		
+	   		<div class="col-xs-4 col-sm-4 col-md-4">
+		   		<div class="panel panel-default">
+		   			<div class="panel-heading">
+		   			Jobs : Hoo Beans
+		   			<button type="button" class="btn btn-info btn-xs pull-right" > Add Hoo </button>
+		   			</div>
+		   			<div class="panel-body">
+	   				
+	   				</div>
+		   		</div>
+		   	</div>
+		   		
+	   		<div class="col-xs-4 col-sm-4 col-md-4">
+		   		<div class="panel panel-default">
+		   			<div class="panel-heading">
+		   			Employees : Chuckle Beans
+		   			<button type="button" class="btn btn-info btn-xs pull-right" > Add Chuckle </button>
+		   			</div>
+		   			<div class="panel-body">
+	   				
+	   				</div>
+		   		</div>
+			</div>   		
+	   	</div>
+   </div>
+   
+   
+   <!--
+    <div ng-app="luigi" ng-controller="ConsoleController" >
+    <h2>Add Consoles (Woo beans)</h2>
+    <h2>{{response}}</h2>
+    <button type="button" class="btn btn-default" ng-click="addConsole()">Create Console</button>
+
+    <h2>Add Jobs (Hoo Beans)</h2>
+    <button type="button" class="btn btn-default"  >Create Jobs</button>
+
+    <h2>Add SubJobs (Chuckle Beans)</h2>
+    <button type="button" class="btn btn-default"  >Create SubJobs</button>
+
+    <h2>Add Employees (Hee beans)</h2>
+    <button type="button" class="btn btn-default"  >Create Employees</button>
+    </div>  -->
+
+    <!---<script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-body">
+        <b>Are you sure???</b>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      </div>
+    </script>  -->
+    
+    
+    
+   
+    
+    
+  </body>
+</html>

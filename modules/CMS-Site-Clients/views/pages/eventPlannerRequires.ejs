@@ -1,0 +1,39 @@
+
+<!--- As the AngularDND is dependent on Jquery so first loading the Jquery Scripts -->
+
+<!--- Note: src/ is the raw code before minification or concatenation or some other compilation - used to read/edit the code
+
+dist/ is the minified/concatnated version - actually used on production sites
+
+This is a common task that is done for assets on the web to make them smaller.
+	`
+You can see an example here:
+http://blog.kevinchisholm.com/javascript/node-js/javascript-concatenation-and-minification-with-the-grunt-js-task-runer/
+ -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
+<script src="../bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+<script src="../bower_components/angular-touch/angular-touch.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+
+<!---	The util module  -->
+<script src="../util/util-module.js"></script>
+<script src="../util/services/EditContentCheckRestService.js"></script>
+
+
+<!---	The luigi module -->
+<script src="../luigi/luigi-module.js"></script>
+<script src="../luigi/services/ConsoleRestServices.js"></script>
+<script src="../luigi/controllers/ConsoleControllers.js"></script>
+<script src="../luigi/luigi-routes.js"></script>
+
+<link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+<!-- 	lvl-drag-drop-->
+<script src="../bower_components/lvlDragDrop/script/lvl-uuid.js"></script>
+<script src="../bower_components/lvlDragDrop/script/lvl-drag-drop.js"></script>
+<script src="../luigi/controllers/LvlController.js"></script>
+
+<link href="../bower_components/lvlDragDrop/css/lvl.css" rel="stylesheet">
